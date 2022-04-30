@@ -39,6 +39,7 @@ jobs:
             dist/*.snap
             dist/*.dmg
             dist/*.exe
+            dist/*.AppImage
 
       # - name: Release
       #   uses: softprops/action-gh-release@v1
