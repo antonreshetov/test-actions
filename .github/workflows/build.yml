@@ -17,11 +17,17 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v3
+        
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: latest
 
       - name: Install Node.js & dependencies
         uses: actions/setup-node@v3
         with:
           node-version: 16
+          cache: 'pnpm'
       - run: pnpm install
 
       # - name: Build/release Electron app
