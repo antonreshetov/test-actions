@@ -31,6 +31,15 @@ jobs:
       - run: pnpm install
       - run: pnpm run build
 
+      - name: Upload Artifacts
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: |
+            dist/*.snap
+            dist/*.dmg
+            dist/*.exe
+
       # - name: Build/release Electron app
       #   uses: samuelmeuli/action-electron-builder@v1
       #   with:
