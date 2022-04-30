@@ -6,39 +6,39 @@ on: push
   #     - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  # build:
-  #   runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ${{ matrix.os }}
 
-  #   strategy:
-  #     matrix:
-  #       # os: [macos-latest, ubuntu-latest, windows-latest]
-  #       os: [macos-latest, ubuntu-latest]
+    strategy:
+      matrix:
+        # os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest]
 
-  #   steps:
-  #     - name: Check out Git repository
-  #       uses: actions/checkout@v3
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
         
-  #     - name: Install PNPM
-  #       uses: pnpm/action-setup@v2.1.0
-  #       with:
-  #         version: latest
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: latest
 
-  #     - name: Install Dependencies & Build
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #         cache: 'pnpm'
-  #     - run: pnpm install
-  #     - run: pnpm run build
+      - name: Install Dependencies & Build
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm run build
 
-      # - name: Upload Artifacts
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: my-artifact
-      #     path: |
-      #       dist/*.snap
-      #       dist/*.dmg
-      #       dist/*.exe
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: |
+            dist/*.snap
+            dist/*.dmg
+            dist/*.exe
 
       # - name: Release
       #   uses: softprops/action-gh-release@v1
@@ -50,27 +50,27 @@ jobs:
       #       dist/*.dmg
       #       dist/*.exe
 
-  assets:
-    # needs: build
-    runs-on: ubuntu-latest
+  # assets:
+  #   # needs: build
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Check out Git repository
+  #       uses: actions/checkout@v3
 
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # if: startsWith(github.ref, 'refs/tags/')
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          draft: true
-          files: |
-            *.md
-            dist/*.snap
-            dist/*.dmg
-            dist/*.exe
+  #     - name: Create release
+  #       uses: softprops/action-gh-release@v1
+  #       env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       # if: startsWith(github.ref, 'refs/tags/')
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         draft: true
+  #         files: |
+  #           *.md
+  #           dist/*.snap
+  #           dist/*.dmg
+  #           dist/*.exe
       # - name: Build/release Electron app
       #   uses: samuelmeuli/action-electron-builder@v1
       #   with:
