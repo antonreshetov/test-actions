@@ -85,3 +85,7 @@ jobs:
           tag_name: ${{ github.ref }}
           draft: true
           preset: angular # Use conventional-changelog preset
+          files: |
+            dist/*.snap
+            dist/*.dmg
+            dist/*.exe
