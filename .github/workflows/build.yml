@@ -55,16 +55,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Release
-      #   uses: softprops/action-gh-release@v1
-      #   # if: startsWith(github.ref, 'refs/tags/')
-      #   with:
-      #     token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-      #     draft: true
-      #     files: |
-      #       dist/*.snap
-      #       dist/*.dmg
-      #       dist/*.exe
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # if: startsWith(github.ref, 'refs/tags/')
+        with:
+          # token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          draft: true
+          files: |
+            *.md
+            dist/*.snap
+            dist/*.dmg
+            dist/*.exe
       # - name: Build/release Electron app
       #   uses: samuelmeuli/action-electron-builder@v1
       #   with:
@@ -76,16 +79,16 @@ jobs:
       #     # release the app after building
       #     release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
-      - name: Create Release for Tag
-        id: release_tag
-        uses: Akryum/release-tag@conventional
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          draft: true
-          preset: angular # Use conventional-changelog preset
-          files: |
-            dist/*.snap
-            dist/*.dmg
-            dist/*.exe
+      # - name: Create Release for Tag
+      #   id: release_tag
+      #   uses: Akryum/release-tag@conventional
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: ${{ github.ref }}
+      #     draft: true
+      #     preset: angular # Use conventional-changelog preset
+      #     files: |
+      #       dist/*.snap
+      #       dist/*.dmg
+      #       dist/*.exe
