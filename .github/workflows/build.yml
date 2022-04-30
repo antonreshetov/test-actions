@@ -23,12 +23,13 @@ jobs:
         with:
           version: latest
 
-      - name: Install Node.js & dependencies
+      - name: Install Dependencies & Build
         uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'pnpm'
       - run: pnpm install
+      - run: pnpm run build
 
       # - name: Build/release Electron app
       #   uses: samuelmeuli/action-electron-builder@v1
