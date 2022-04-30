@@ -31,6 +31,7 @@ export default {
   extraMetadata: {
     main: 'src/main/index.js'
   },
+  publish: false,
   files: [
     '!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}',
     '!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}',
